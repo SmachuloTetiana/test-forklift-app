@@ -1,13 +1,13 @@
 @font-face {
-  font-family: 'GothamPro';
-  src: url('./fonts/GothamPro.ttf');
+  font-family: "GothamPro";
+  src: url("./fonts/GothamPro.ttf");
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'GothamPro';
-  src: url('./fonts/GothamPro-Bold.ttf');
+  font-family: "GothamPro";
+  src: url("./fonts/GothamPro-Bold.ttf");
   font-style: normal;
   font-weight: 600;
 }
@@ -19,8 +19,12 @@
 
 body {
   font-size: 14px;
-  font-family: 'GothamPro';
+  font-family: "GothamPro";
   font-weight: 400;
+}
+
+p {
+  margin: 0;
 }
 
 h1,
@@ -42,6 +46,10 @@ h3 {
 label {
   text-transform: uppercase;
   font-size: 0.8rem;
+}
+
+.invalid-feedback {
+  font-size: 0.75rem;
 }
 
 .form-control {

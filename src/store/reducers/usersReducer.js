@@ -1,9 +1,9 @@
-import { CREATE_USER_ACCOUNT, FETCH_USER, SHOW_LOADER } from '../types';
+import { REGISTER_USER, FETCH_USER, SHOW_LOADER, LOGIN_USER } from "../types";
 
 const initialState = {
-  users: [],
+  currentUser: [],
   fetchedUsers: [],
-  loading: false
+  loading: false,
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -11,17 +11,18 @@ export const usersReducer = (state = initialState, action) => {
     case SHOW_LOADER:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
-    case CREATE_USER_ACCOUNT:
+    case REGISTER_USER:
+    case LOGIN_USER:
       return {
         ...state,
-        users: [...state.users, action.payload]
+        currentUser: [...state.currentUser, action.payload],
       };
     case FETCH_USER:
       return {
         ...state,
-        fetchedUsers: action.payload
+        fetchedUsers: action.payload,
       };
     default:
       return state;

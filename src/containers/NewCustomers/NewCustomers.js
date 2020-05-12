@@ -1,35 +1,54 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { createUser } from '../../store/actions';
-import { authRef } from '../../firebase';
+import React, { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { authRef } from "../../firebase";
 
-const NewCustomers = ({ myUsers, createUser }) => {
-  const [customer, setCustomer] = useState({
-    name: '',
-    email: '',
-    password: ''
+export const NewCustomers = ({ registerUser }) => {
+  const [alert, setAlert] = useState(false);
+
+  const {
+    handleSubmit,
+    handleChange,
+    handleReset,
+    values,
+    errors,
+    s,
+  } = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+    onSubmit: async (values) => {
+      const res = await authRef.createUserWithEmailAndPassword(
+        values.email,
+        values.password
+      );
+
+      const { displayName, email: userEmail, uid } = res.user;
+
+      registerUser({
+        displayName: values.name,
+        userEmail,
+        uid,
+      });
+
+      handleReset();
+      setAlert(!alert);
+    },
+    onReset: () => {},
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .min(2, "Too Short!")
+        .required("Name is a required field"),
+      email: Yup.string()
+        .email("Invalid email")
+        .required("Email is a required field"),
+      password: Yup.string()
+        .min(6, "Password has to be longer than 6 characters!")
+        .required("Password is a required field"),
+    }),
   });
-
-  const changeInputHandler = event => {
-    event.preventDefault();
-    setCustomer({
-      ...customer,
-      [event.target.name]: event.target.value
-    });
-  };
-
-  const submitHandler = async event => {
-    event.preventDefault();
-
-    const { email, password } = customer;
-
-    try {
-      const res = await authRef.createUserWithEmailAndPassword(email, password);
-      createUser(res);
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   return (
     <React.Fragment>
@@ -40,51 +59,50 @@ const NewCustomers = ({ myUsers, createUser }) => {
         track your orders in your account and more.
       </p>
 
-      <form onSubmit={submitHandler}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            className="form-control"
-            type="text"
-            name="name"
-            value={customer.name}
-            onChange={changeInputHandler}
-          />
+      {!alert ? (
+        <form onSubmit={handleSubmit} onReset={handleReset} className="mt-3">
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              className={"form-control " + (errors.name ? "is-invalid" : "")}
+              type="text"
+              name="name"
+              value={values.name}
+              onChange={handleChange}
+            />
+            <div className="invalid-feedback">{errors.name}</div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email adress</label>
+            <input
+              className={"form-control " + (errors.name ? "is-invalid" : "")}
+              type="text"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+            />
+            <div className="invalid-feedback">{errors.email}</div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              className={"form-control " + (errors.name ? "is-invalid" : "")}
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+            />
+            <div className="invalid-feedback">{errors.password}</div>
+          </div>
+          <button type="submit" className="btn btn-outline-dark">
+            Create an account
+          </button>
+        </form>
+      ) : (
+        <div className="alert alert-success mt-4">
+          <p>Registration Successful!</p>
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email adress</label>
-          <input
-            className="form-control"
-            type="text"
-            name="email"
-            value={customer.email}
-            onChange={changeInputHandler}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            className="form-control"
-            type="password"
-            name="password"
-            value={customer.password}
-            onChange={changeInputHandler}
-          />
-        </div>
-        <button type="submit" className="btn btn-outline-dark">
-          Create an account
-        </button>
-      </form>
+      )}
     </React.Fragment>
   );
 };
-
-const mapStateToProps = state => ({
-  myUsers: state.users.users
-});
-
-const mapDispatchToProps = {
-  createUser
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NewCustomers);

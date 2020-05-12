@@ -1,17 +1,23 @@
-import { CREATE_USER_ACCOUNT, SHOW_LOADER, FETCH_USER } from './types';
+import { REGISTER_USER, SHOW_LOADER, FETCH_USER, LOGIN_USER } from "./types";
 
 export const showLoader = () => ({
-  type: SHOW_LOADER
+  type: SHOW_LOADER,
 });
 
-export const createUser = payload => {
+export const registerUser = () => {
   return {
-    type: CREATE_USER_ACCOUNT,
-    payload
+    type: REGISTER_USER,
   };
 };
 
-export const fetchedUsers = payload => ({
+export const loginUser = (payload) => {
+  return {
+    type: LOGIN_USER,
+    payload,
+  };
+};
+
+export const fetchedUsers = (payload) => ({
   type: FETCH_USER,
-  payload
+  payload,
 });

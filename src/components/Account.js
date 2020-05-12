@@ -1,6 +1,7 @@
-import React from 'react';
-import NewCustomers from '../containers/NewCustomers/NewCustomers';
-import { RegisteredCustomers } from '../containers/RegisteredCustomers/RegisteredCustomers';
+import React from "react";
+import NewCustomers from "containers/NewCustomers";
+import RegisteredCustomers from "containers/RegisteredCustomers";
+
 export const Account = () => {
   return (
     <div className="container Account">
