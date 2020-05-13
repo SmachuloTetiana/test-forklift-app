@@ -1,4 +1,10 @@
-import { REGISTER_USER, SHOW_LOADER, FETCH_USER, LOGIN_USER } from "./types";
+import {
+  REGISTER_USER,
+  SHOW_LOADER,
+  FETCH_USER,
+  LOGIN_USER,
+  LOGOUT_USER,
+} from "./types";
 
 export const showLoader = () => ({
   type: SHOW_LOADER,
@@ -17,7 +23,7 @@ export const loginUser = (payload) => {
   };
 };
 
-export const fetchedUsers = (payload) => ({
-  type: FETCH_USER,
+export const logoutUser = (payload) => ({
+  type: LOGOUT_USER,
   payload,
 });

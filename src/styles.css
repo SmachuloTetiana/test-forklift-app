@@ -48,6 +48,14 @@ label {
   font-size: 0.8rem;
 }
 
+.alert {
+  padding: 0.75rem 1rem;
+}
+
+.bg-light {
+  background-color: #ececec !important;
+}
+
 .invalid-feedback {
   font-size: 0.75rem;
 }
@@ -78,6 +86,10 @@ label {
   border: 1px solid #ebebeb;
   padding-top: 15px;
   padding-bottom: 15px;
+}
+
+.navbar-nav {
+  flex-grow: inherit;
 }
 
 .Banner {

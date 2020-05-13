@@ -1,34 +1,42 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { authRef } from "../../firebase";
 
-export const RegisteredCustomers = ({ loginUser }) => {
-  const [alert, setAlert] = useState(false);
+const loginSchema = Yup.object({
+  email: Yup.string().email().required("Email is a required field"),
+  password: Yup.string().required("Password is a required field"),
+});
 
-  const { handleSubmit, handleChange, values, errors } = useFormik({
+export const RegisteredCustomers = ({ loginUser }) => {
+  const { handleSubmit, handleChange, values, errors, status } = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setStatus, setErrors, resetForm }) => {
       try {
         const res = await authRef.signInWithEmailAndPassword(
           values.email,
           values.password
         );
 
-        loginUser(res);
-      } catch (e) {
-        console.log(e);
+        const { displayName, email: userEmail, uid } = res.user;
 
-        setAlert(!alert);
+        loginUser({
+          displayName,
+          userEmail,
+          uid,
+        });
+
+        resetForm();
+
+        setStatus("User was updated successfully.");
+      } catch (err) {
+        setErrors({ msg: err.message });
       }
     },
-    validationSchema: Yup.object({
-      email: Yup.string().email().required("Email is a required field"),
-      password: Yup.string().required("Password is a required field"),
-    }),
+    validationSchema: loginSchema,
   });
 
   return (
@@ -36,11 +44,11 @@ export const RegisteredCustomers = ({ loginUser }) => {
       <h3>Registered Customers</h3>
       <p>If you have an account with us, please log in.</p>
 
-      {alert && (
-        <div className="alert alert-danger">
-          <p>{alert}</p>
-        </div>
+      {errors["msg"] && (
+        <div className="alert alert-danger mt-3">{errors["msg"]}</div>
       )}
+
+      {status && <div className="alert alert-success mt-3">{status}</div>}
 
       <form onSubmit={handleSubmit} className="mt-3">
         <div className="form-group">
