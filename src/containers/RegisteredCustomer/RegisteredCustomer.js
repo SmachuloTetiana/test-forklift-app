@@ -8,7 +8,7 @@ const loginSchema = Yup.object({
   password: Yup.string().required("Password is a required field"),
 });
 
-export const RegisteredCustomers = ({ loginUser }) => {
+export const RegisteredCustomer = ({ loginUser }) => {
   const { handleSubmit, handleChange, values, errors, status } = useFormik({
     initialValues: {
       email: "",

@@ -1,11 +1,17 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { authRef } from "../firebase";
-import { Context } from "../context/context";
+import { Context } from "context/context";
+import { logoutUser } from "store/actions";
 
 export const Navbar = () => {
-  const logOutUser = () => {
-    authRef.signOut();
+  const { state, dispatch } = useContext(Context);
+  const { currentUser } = state;
+
+  const signOutButton = () => {
+    authRef.signOut().then(() => {
+      dispatch(logoutUser(null));
+    });
   };
 
   return (
@@ -41,29 +47,36 @@ export const Navbar = () => {
               About Us
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink
-              activeClassName="active"
-              className="nav-link"
-              to="/account"
-            >
-              Account
-            </NavLink>
-          </li>
-          <React.Fragment>
-            <li className="nav-item ml-auto">
+          {!currentUser ? (
+            <li className="nav-item">
               <NavLink
                 activeClassName="active"
                 className="nav-link"
-                to="/users"
+                to="/account"
               >
-                My Profile
+                Account
               </NavLink>
             </li>
-            <button type="button" className="btn btn-dark" onClick={logOutUser}>
-              LogOut
-            </button>
-          </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <li className="nav-item ml-auto">
+                <NavLink
+                  activeClassName="active"
+                  className="nav-link"
+                  to="/user"
+                >
+                  My Profile
+                </NavLink>
+              </li>
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={signOutButton}
+              >
+                LogOut
+              </button>
+            </React.Fragment>
+          )}
         </ul>
       </div>
     </nav>

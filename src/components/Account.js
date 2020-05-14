@@ -1,6 +1,6 @@
 import React from "react";
-import NewCustomers from "containers/NewCustomers";
-import RegisteredCustomers from "containers/RegisteredCustomers";
+import { NewCustomer } from "containers/NewCustomer/NewCustomer";
+import RegisteredCustomer from "containers/RegisteredCustomer";
 
 export const Account = () => {
   return (
@@ -9,10 +9,10 @@ export const Account = () => {
 
       <div className="row border">
         <div className="col-md-6 col-12">
-          <NewCustomers />
+          <NewCustomer />
         </div>
         <div className="col-md-6 col-12">
-          <RegisteredCustomers />
+          <RegisteredCustomer />
         </div>
       </div>
     </div>

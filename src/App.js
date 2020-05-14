@@ -1,12 +1,15 @@
 import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 
+import { ContextState } from "context/contextState";
+
 import { Navbar } from "components/Navbar";
 import { Home } from "components/Home";
 import { AboutUs } from "components/AboutUs";
 import { Account } from "components/Account";
-import Users from "containers/AllUsers/Users";
-import { ContextState } from "context/contextState";
+
+import { User } from "containers/Profile/User";
+import CreateCustomer from "containers/CreateCustomer";
 
 function App() {
   return (
@@ -18,7 +21,8 @@ function App() {
             <Route path={"/"} exact component={Home} />
             <Route path={"/about-us"} component={AboutUs} />
             <Route path={"/account"} component={Account} />
-            <Route path={"/users"} component={Users} />
+            <Route path={"/user"} component={User} />
+            <Route path={"/create"} component={CreateCustomer} />
           </Switch>
         </div>
       </BrowserRouter>

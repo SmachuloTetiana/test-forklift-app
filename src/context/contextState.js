@@ -1,15 +1,17 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useReducer } from "react";
 import { Context } from "./context";
 import { authRef } from "../firebase";
-import { loginUser } from "../store/actions";
+import { loginUser } from "store/actions";
+import { usersReducer, initialState } from "store/reducers/usersReducer";
 
 export const ContextState = ({ children }) => {
-  const dispatch = useDispatch();
+  const [state, dispatch] = useReducer(usersReducer, initialState);
 
   useEffect(() => {
     authRef.onAuthStateChanged((user) => dispatch(loginUser(user)));
   }, [dispatch]);
 
-  return <Context.Provider value={{}}>{children}</Context.Provider>;
+  return (
+    <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
+  );
 };

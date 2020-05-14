@@ -1,8 +1,13 @@
-import { REGISTER_USER, SHOW_LOADER, LOGIN_USER, LOGOUT_USER } from "../types";
+import {
+  CREATE_ACCOUNT_USER,
+  SHOW_LOADER,
+  LOGIN_USER,
+  LOGOUT_USER,
+} from "../types";
 
 export const initialState = {
-  currentUser: [],
-  fetchedUsers: [],
+  registerUser: null,
+  currentUser: null,
   loading: false,
 };
 
@@ -13,11 +18,15 @@ export const usersReducer = (state = initialState, action) => {
         ...state,
         loading: true,
       };
-    case REGISTER_USER:
+    case CREATE_ACCOUNT_USER:
+      return {
+        ...state,
+        registerUser: action.payload,
+      };
     case LOGIN_USER:
       return {
         ...state,
-        currentUser: [...state.currentUser, action.payload],
+        currentUser: action.payload,
       };
     case LOGOUT_USER:
       return {
