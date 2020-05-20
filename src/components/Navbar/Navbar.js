@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { authRef } from "../firebase";
-import { Context } from "context/context";
+import { authRef } from "../../firebase";
 import { logoutUser } from "store/actions";
+import { Context } from "context/contextState";
 
-export const Navbar = () => {
-  const { state, dispatch } = useContext(Context);
-  const { currentUser } = state;
+const Navbar = ({ currentUser }) => {
+  const { dispatch } = useContext(Context);
 
   const signOutButton = () => {
     authRef.signOut().then(() => {
@@ -47,6 +46,11 @@ export const Navbar = () => {
               About Us
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to="/list">
+              List
+            </NavLink>
+          </li>
           {!currentUser ? (
             <li className="nav-item">
               <NavLink
@@ -63,7 +67,7 @@ export const Navbar = () => {
                 <NavLink
                   activeClassName="active"
                   className="nav-link"
-                  to="/user"
+                  to="/my-account"
                 >
                   My Profile
                 </NavLink>
@@ -82,3 +86,5 @@ export const Navbar = () => {
     </nav>
   );
 };
+
+export default Navbar;

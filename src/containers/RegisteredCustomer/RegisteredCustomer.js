@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { authRef } from "../../firebase";
+import { Redirect } from "react-router-dom";
+import { Context } from "context/contextState";
+import { loginUser } from "store/actions";
 
 const loginSchema = Yup.object({
   email: Yup.string().email().required("Email is a required field"),
   password: Yup.string().required("Password is a required field"),
 });
 
-export const RegisteredCustomer = ({ loginUser }) => {
+const RegisteredCustomer = ({ isLoggedIn }) => {
+  const { dispatch } = useContext(Context);
+
   const { handleSubmit, handleChange, values, errors, status } = useFormik({
     initialValues: {
       email: "",
@@ -21,13 +26,7 @@ export const RegisteredCustomer = ({ loginUser }) => {
           values.password
         );
 
-        const { displayName, email: userEmail, uid } = res.user;
-
-        loginUser({
-          displayName,
-          userEmail,
-          uid,
-        });
+        dispatch(loginUser(res.user));
 
         resetForm();
 
@@ -38,6 +37,8 @@ export const RegisteredCustomer = ({ loginUser }) => {
     },
     validationSchema: loginSchema,
   });
+
+  // if (!isLoggedIn) return <Redirect to="/my-account" />;
 
   return (
     <React.Fragment>
@@ -80,3 +81,5 @@ export const RegisteredCustomer = ({ loginUser }) => {
     </React.Fragment>
   );
 };
+
+export default RegisteredCustomer;

@@ -13,7 +13,7 @@ const createAccountSchema = Yup.object({
     .required("Password is a required field"),
 });
 
-export const CreateCustomer = ({ createAccountUser }) => {
+export const CreateCustomer = () => {
   const { handleSubmit, handleChange, values, errors, status } = useFormik({
     initialValues: {
       name: "",
@@ -30,16 +30,6 @@ export const CreateCustomer = ({ createAccountUser }) => {
         response.user.updateProfile({
           displayName: values.name,
         });
-
-        const { displayName, email: userEmail, uid } = response.user;
-
-        const registerUser = {
-          displayName,
-          userEmail,
-          uid,
-        };
-
-        createAccountUser(registerUser);
 
         resetForm();
 

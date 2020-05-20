@@ -1,8 +1,14 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 export const NewCustomer = () => {
-  const history = useHistory();
+  const [redirect, setRedirect] = useState(false);
+
+  const handleClick = () => {
+    setRedirect(!redirect);
+  };
+
+  if (redirect) return <Redirect from="/account" to="/create" />;
 
   return (
     <React.Fragment>
@@ -15,7 +21,7 @@ export const NewCustomer = () => {
 
       <button
         type="button"
-        onClick={() => history.push("/create")}
+        onClick={handleClick}
         className="btn btn-outline-dark mt-3"
       >
         Create an account

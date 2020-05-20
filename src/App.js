@@ -1,32 +1,34 @@
 import React from "react";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 
 import { ContextState } from "context/contextState";
 
-import { Navbar } from "components/Navbar";
+import Navbar from "components/Navbar";
 import { Home } from "components/Home";
 import { AboutUs } from "components/AboutUs";
 import { Account } from "components/Account";
 
-import { User } from "containers/Profile/User";
-import CreateCustomer from "containers/CreateCustomer";
+import { CreateCustomer } from "containers/CreateCustomer/CreateCustomer";
+import { List } from "containers/List/List";
+import UserAccount from "containers/Profile";
 
 function App() {
   return (
-    <ContextState>
-      <BrowserRouter>
-        <div className="container-fluid px-0">
+    <BrowserRouter>
+      <div className="container-fluid px-0">
+        <ContextState>
           <Navbar />
           <Switch>
             <Route path={"/"} exact component={Home} />
             <Route path={"/about-us"} component={AboutUs} />
             <Route path={"/account"} component={Account} />
-            <Route path={"/user"} component={User} />
+            <Route path={"/my-account"} component={UserAccount} />
             <Route path={"/create"} component={CreateCustomer} />
+            <Route path={"/list"} component={List} />
           </Switch>
-        </div>
-      </BrowserRouter>
-    </ContextState>
+        </ContextState>
+      </div>
+    </BrowserRouter>
   );
 }
 
