@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 
 import { ContextState } from "context/contextState";
 
@@ -9,8 +9,9 @@ import { AboutUs } from "components/AboutUs";
 import { Account } from "components/Account";
 
 import { CreateCustomer } from "containers/CreateCustomer/CreateCustomer";
-import { List } from "containers/List/List";
+import Products from "containers/Products";
 import UserAccount from "containers/Profile";
+import { ProductDetail } from "containers/Products/ProductDetail";
 
 function App() {
   return (
@@ -22,9 +23,10 @@ function App() {
             <Route path={"/"} exact component={Home} />
             <Route path={"/about-us"} component={AboutUs} />
             <Route path={"/account"} component={Account} />
-            <Route path={"/my-account"} component={UserAccount} />
             <Route path={"/create"} component={CreateCustomer} />
-            <Route path={"/list"} component={List} />
+            <Route path={"/my-account"} component={UserAccount} />
+            <Route path={"/products"} component={Products} />
+            <Route path={"/product/:productModel"} component={ProductDetail} />
           </Switch>
         </ContextState>
       </div>

@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { authRef } from "../../firebase";
 import { logoutUser } from "store/actions";
 import { Context } from "context/contextState";
 
-const Navbar = ({ currentUser }) => {
-  const { dispatch } = useContext(Context);
+const Navbar = ({ isLoggedIn }) => {
+  // const { dispatch } = useContext(Context);
 
   const signOutButton = () => {
     authRef.signOut().then(() => {
-      dispatch(logoutUser(null));
+      // dispatch(logoutUser(null));
     });
   };
 
@@ -47,11 +47,15 @@ const Navbar = ({ currentUser }) => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to="/list">
-              List
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/products"
+            >
+              Products
             </NavLink>
           </li>
-          {!currentUser ? (
+          {!isLoggedIn ? (
             <li className="nav-item">
               <NavLink
                 activeClassName="active"

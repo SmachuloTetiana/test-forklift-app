@@ -2,7 +2,6 @@ import React, { useEffect, createContext } from "react";
 import { authRef } from "../firebase";
 import { useDispatch } from "react-redux";
 import { loginUser } from "store/actions";
-import { initialState } from "store/reducers/usersReducer";
 
 export const Context = createContext();
 

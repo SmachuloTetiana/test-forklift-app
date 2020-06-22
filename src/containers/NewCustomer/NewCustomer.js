@@ -8,7 +8,7 @@ export const NewCustomer = () => {
     setRedirect(!redirect);
   };
 
-  if (redirect) return <Redirect from="/account" to="/create" />;
+  if (redirect) return <Redirect to="/create" />;
 
   return (
     <React.Fragment>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { authRef } from "../../firebase";
 
 const UserAccount = ({ currentUser }) => {
