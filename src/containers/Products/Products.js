@@ -3,7 +3,7 @@ import { database } from "../../firebase";
 import { AddForkliftForm } from "./AddForkliftsForm";
 import { Product } from "./Product";
 
-const Products = ({ getProducts, products }) => {
+const Products = ({ getProducts, products, isLoggedIn }) => {
   useEffect(() => {
     database.ref("/").on("value", (snapshot) => {
       getProducts(snapshot.val());
@@ -12,7 +12,7 @@ const Products = ({ getProducts, products }) => {
 
   return (
     <div className="container">
-      <AddForkliftForm />
+      {isLoggedIn && <AddForkliftForm />}
 
       <h2 className="title text-center mt-5 mb-5">Own production forklifts</h2>
 

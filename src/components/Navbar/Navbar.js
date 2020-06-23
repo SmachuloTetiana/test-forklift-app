@@ -1,15 +1,11 @@
 import React, { useContext } from "react";
 import { NavLink, Redirect } from "react-router-dom";
 import { authRef } from "../../firebase";
-import { logoutUser } from "store/actions";
-import { Context } from "context/contextState";
 
-const Navbar = ({ isLoggedIn }) => {
-  // const { dispatch } = useContext(Context);
-
+const Navbar = ({ isLoggedIn, logoutUser }) => {
   const signOutButton = () => {
     authRef.signOut().then(() => {
-      // dispatch(logoutUser(null));
+      logoutUser(null);
     });
   };
 
