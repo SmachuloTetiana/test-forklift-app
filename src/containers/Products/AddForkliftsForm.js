@@ -8,7 +8,7 @@ const initialState = {
   engine: "",
   producer: "",
   description: "",
-  fileName: null,
+  photo: null,
   imageURL: null,
 };
 
@@ -17,8 +17,6 @@ const loginSchema = Yup.object({
   engine: Yup.string().required("Engine is a required field"),
   producer: Yup.string().required("Producer is a required field"),
   description: Yup.string().required("Description is a required field"),
-  fileName: Yup.mixed().notRequired(),
-  imageURL: Yup.mixed().notRequired(),
 });
 
 export const AddForkliftForm = () => {
@@ -32,13 +30,7 @@ export const AddForkliftForm = () => {
     initialValues: initialState,
     onSubmit: async (values, { setErrors, resetForm }) => {
       try {
-        const newVal = {
-          ...values,
-          fileName: values.file.name,
-          imageURL: values.imageURL,
-        };
-
-        database.ref("forklifts").push(newVal);
+        await database.ref("/").push(values);
 
         resetForm();
       } catch (err) {
@@ -47,6 +39,19 @@ export const AddForkliftForm = () => {
     },
     validationSchema: loginSchema,
   });
+
+  const handleChangeImage = (e) => {
+    let file = e.target.files[0];
+    let reader = new FileReader();
+
+    setFieldValue("file", file.name);
+
+    reader.onloadend = () => {
+      setFieldValue("imageURL", reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -103,17 +108,9 @@ export const AddForkliftForm = () => {
         <div className="form-group col-12">
           <input
             type="file"
-            name="file"
-            multiple={true}
-            onChange={(event) => {
-              let file = event.target.files[0];
-              let reader = new FileReader();
-              setFieldValue("file", file);
-              reader.onloadend = () => {
-                setFieldValue("imageURL", reader.result);
-              };
-              reader.readAsDataURL(file);
-            }}
+            name="photo"
+            className="form-control"
+            onChange={handleChangeImage}
           />
         </div>
       </div>

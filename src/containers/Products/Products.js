@@ -17,13 +17,15 @@ const Products = ({ getProducts, products }) => {
       <h2 className="title text-center mt-5 mb-5">Own production forklifts</h2>
 
       <ul className="row">
-        {Object.values(products).map((val) =>
-          Object.values(val).map((item, index) => (
+        {!products ? (
+          <p>No data</p>
+        ) : (
+          Object.entries(products).map(([key, val]) => (
             <li
-              key={index}
-              className="Product col-4 d-flex flex-column pl-4 pr-4"
+              key={key}
+              className="Product col-4 d-flex flex-column pl-4 pr-4 mb-4"
             >
-              <Product {...item} />
+              <Product {...val} index={key} />
             </li>
           ))
         )}

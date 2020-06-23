@@ -9,9 +9,9 @@ import { AboutUs } from "components/AboutUs";
 import { Account } from "components/Account";
 
 import { CreateCustomer } from "containers/CreateCustomer/CreateCustomer";
-import Products from "containers/Products";
 import UserAccount from "containers/Profile";
-import { ProductDetail } from "containers/Products/ProductDetail";
+import ProductDetail from "containers/ProductDetail";
+import Products from "containers/Products";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
             <Route path={"/create"} component={CreateCustomer} />
             <Route path={"/my-account"} component={UserAccount} />
             <Route path={"/products"} component={Products} />
-            <Route path={"/product/:productModel"} component={ProductDetail} />
+            <Route path={"/product/:productId"} component={ProductDetail} />
           </Switch>
         </ContextState>
       </div>
