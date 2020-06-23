@@ -146,6 +146,10 @@ label.required::after {
   display: block;
 }
 
+.Product .no-image {
+  background-color: #eaeaea;
+}
+
 .Product a:hover {
   text-decoration: none;
   color: #ae9a64;

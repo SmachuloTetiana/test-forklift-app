@@ -106,12 +106,7 @@ export const AddForkliftForm = () => {
         </div>
 
         <div className="form-group col-12">
-          <input
-            type="file"
-            name="photo"
-            className="form-control"
-            onChange={handleChangeImage}
-          />
+          <input type="file" name="photo" onChange={handleChangeImage} />
         </div>
       </div>
 

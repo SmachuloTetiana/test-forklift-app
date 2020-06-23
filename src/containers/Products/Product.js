@@ -6,7 +6,11 @@ export const Product = (props) => {
 
   return (
     <React.Fragment>
-      <div className="outer-image d-flex justify-content-center">
+      <div
+        className={`outer-image d-flex justify-content-center align-items-center ${
+          !imageURL && "no-image"
+        }`}
+      >
         {imageURL ? (
           <img src={imageURL} width="auto" height="225" />
         ) : (
