@@ -6,7 +6,6 @@ const UserAccount = ({ currentUser }) => {
     e.preventDefault();
 
     const user = authRef.currentUser;
-    console.log(user);
     try {
       await user.updatePassword();
       console.log("Password Updated!");

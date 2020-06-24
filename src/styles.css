@@ -146,7 +146,7 @@ label.required::after {
   display: block;
 }
 
-.Product .no-image {
+.no-image {
   background-color: #eaeaea;
 }
 
@@ -163,4 +163,55 @@ label.required::after {
   color: #ae9a64;
   font-weight: 600;
   display: block;
+}
+
+/** Product Detail Page**/
+
+.product-model {
+  font-size: 18px;
+  letter-spacing: 3px;
+  font-weight: 400;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.product-producer {
+  color: #ae9a64;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.product-id,
+.product-engine {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #343434;
+  line-height: 25px;
+}
+
+.product-description {
+  border-top: 1px solid #eaeaea;
+}
+
+.table td {
+  border: 1px solid #eaeaea;
+}
+
+.table .label {
+  text-transform: uppercase;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.table .data {
+  color: #999;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.product-img .no-image {
+  margin: 0 20px;
 }
