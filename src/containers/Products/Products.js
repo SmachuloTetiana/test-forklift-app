@@ -33,8 +33,9 @@ const Products = ({ getProducts, products, isLoggedIn }) => {
     <div className="container">
       <Select
         options={options}
-        value={selectedOption}
+        value={options.value}
         onChange={handleChange}
+        className="mb-3"
       />
       {isLoggedIn && <AddForkliftForm />}
 
