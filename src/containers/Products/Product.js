@@ -23,7 +23,6 @@ export const Product = (props) => {
       </Link>
 
       <span className="d-flex justify-content-center">{producer}</span>
-      {/* <p>{props.description}</p> */}
     </React.Fragment>
   );
 };

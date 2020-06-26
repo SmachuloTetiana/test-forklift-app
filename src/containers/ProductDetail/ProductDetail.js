@@ -42,7 +42,7 @@ const ProductDetail = ({ match, products }) => {
           <table className="table">
             <tbody>
               <tr className="row no-gutters">
-                <td className="label col-4">Power type:</td>
+                <td className="label col-4">Power type</td>
                 <td className="data col-8">{product.engine}</td>
               </tr>
             </tbody>

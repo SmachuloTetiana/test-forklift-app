@@ -1,7 +1,19 @@
 import React from "react";
-import { useFormik } from "formik";
+import { useFormik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { database } from "../../firebase";
+import Select from "react-select";
+
+const options = [
+  {
+    label: "Add Forklift",
+    value: "forklift",
+  },
+  {
+    label: "Add Spare Parts",
+    value: "spare_parts",
+  },
+];
 
 const initialState = {
   model: "",
@@ -28,9 +40,12 @@ export const AddForkliftForm = () => {
     errors,
   } = useFormik({
     initialValues: initialState,
-    onSubmit: async (values, { setErrors, resetForm }) => {
+    onSubmit: async (
+      { option: { value: productType }, ...rest } = values,
+      { setErrors, resetForm }
+    ) => {
       try {
-        await database.ref("/").push(values);
+        await database.ref("/").push({ productType, ...rest });
 
         resetForm();
       } catch (err) {
@@ -55,6 +70,17 @@ export const AddForkliftForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <Select
+        className="mb-3"
+        options={options}
+        onChange={(e) => setFieldValue("option", e)}
+        value={values.option}
+      />
+
+      {values.option && values.option.value === "forklift" && (
+        <p>Forklift Field</p>
+      )}
+
       <div className="row">
         <div className="form-group col-lg-4 col-12">
           <label htmlFor="engine">Engine</label>
@@ -104,7 +130,9 @@ export const AddForkliftForm = () => {
           ></textarea>
           <div className="invalid-feedback">{errors.description}</div>
         </div>
+      </div>
 
+      <div className="row">
         <div className="form-group col-12">
           <input type="file" name="photo" onChange={handleChangeImage} />
         </div>
