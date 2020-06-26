@@ -215,3 +215,34 @@ label.required::after {
 .product-img .no-image {
   margin: 0 20px;
 }
+
+/** Filter Panel **/
+
+.toolbar-title {
+  position: relative;
+  text-transform: capitalize;
+  line-height: initial;
+  padding-bottom: 10px;
+}
+
+.toolbar-title::after {
+  content: "";
+  width: 50px;
+  height: 2px;
+  background-color: #343434;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.toolbar-title span {
+  font-size: 2em;
+  font-weight: 600;
+  color: #343434;
+  letter-spacing: 2px;
+}
+
+.toolbar-subtitle {
+  color: #ae9a64;
+  text-transform: uppercase;
+}
