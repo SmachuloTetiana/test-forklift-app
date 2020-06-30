@@ -1,4 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER, GET_PRODUCTS } from "./types";
+import { LOGIN_USER, LOGOUT_USER, GET_PRODUCTS, FILTER_BY_TYPE } from "./types";
 
 export const loginUser = (user) => ({
   type: LOGIN_USER,
@@ -12,5 +12,10 @@ export const logoutUser = (user) => ({
 
 export const getProducts = (data) => ({
   type: GET_PRODUCTS,
+  payload: data,
+});
+
+export const filterProductsByType = (data) => ({
+  type: FILTER_BY_TYPE,
   payload: data,
 });

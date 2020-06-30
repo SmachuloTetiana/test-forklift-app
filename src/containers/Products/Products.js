@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { database } from "../../firebase";
 import { AddForkliftForm } from "./AddForkliftsForm";
 import { Product } from "./Product";
-import { FilterPanel } from "containers/FilterPanel/FilterPanel";
+import FilterPanel from "containers/FilterPanel";
 
 const Products = ({ getProducts, products, isLoggedIn }) => {
   useEffect(() => {
