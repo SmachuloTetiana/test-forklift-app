@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
 const FilterPanel = ({ products, filterProductsByType }) => {
-  const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState("");
 
-  const handleCheck = () => {
-    setCheck(!check);
-    filterProductsByType(products);
+  const handleCheck = (e) => {
+    const { value } = e.target;
+    setCheck(value);
+    filterProductsByType(products, value);
   };
 
   return (
@@ -17,24 +18,28 @@ const FilterPanel = ({ products, filterProductsByType }) => {
       <div className="toolbar-content mt-4">
         <p className="toolbar-subtitle mb-2">type</p>
 
-        <div className="checkList d-flex align-items-center">
-          <label htmlFor="check1">Forklifts</label>
-          <input
-            type="checkbox"
-            id="check1"
-            defaultChecked={check}
-            onChange={handleCheck}
-          />
-        </div>
+        <div className="radioButtons" onChange={handleCheck}>
+          <p>
+            <label htmlFor="check1">Forklifts</label>
+            <input
+              type="radio"
+              id="check1"
+              name="type"
+              defaultValue="forklift"
+              defaultChecked={check === "forklift"}
+            />
+          </p>
 
-        <div className="checkList">
-          <label htmlFor="check2">Spare parts</label>
-          <input
-            type="checkbox"
-            id="check2"
-            defaultChecked={check}
-            onChange={handleCheck}
-          />
+          <p>
+            <label htmlFor="check2">Spare parts</label>
+            <input
+              type="radio"
+              id="check2"
+              name="type"
+              defaultValue="spare_parts"
+              defaultChecked={check === "spare_parts"}
+            />
+          </p>
         </div>
       </div>
     </div>

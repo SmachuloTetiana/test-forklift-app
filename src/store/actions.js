@@ -15,7 +15,8 @@ export const getProducts = (data) => ({
   payload: data,
 });
 
-export const filterProductsByType = (data) => ({
+export const filterProductsByType = (data, chekedName) => ({
   type: FILTER_BY_TYPE,
-  payload: data,
+  data,
+  chekedName,
 });

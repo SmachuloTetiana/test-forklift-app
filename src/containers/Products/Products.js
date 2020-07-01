@@ -4,7 +4,7 @@ import { AddForkliftForm } from "./AddForkliftsForm";
 import { Product } from "./Product";
 import FilterPanel from "containers/FilterPanel";
 
-const Products = ({ getProducts, products, isLoggedIn }) => {
+const Products = ({ getProducts, products, isLoggedIn, filtered }) => {
   useEffect(() => {
     database.ref("/").on("value", (snapshot) => {
       getProducts(snapshot.val());
@@ -25,6 +25,15 @@ const Products = ({ getProducts, products, isLoggedIn }) => {
           <ul className="row">
             {!products ? (
               <p>No data</p>
+            ) : filtered ? (
+              Object.entries(filtered).map(([key, val]) => (
+                <li
+                  key={key}
+                  className="Product col-4 d-flex flex-column pl-4 pr-4 mb-4"
+                >
+                  <Product {...val} index={key} />
+                </li>
+              ))
             ) : (
               Object.entries(products).map(([key, val]) => (
                 <li

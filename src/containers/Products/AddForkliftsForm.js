@@ -77,47 +77,47 @@ export const AddForkliftForm = () => {
         value={values.option}
       />
 
-      {values.option && values.option.value === "forklift" && (
+      {values.option && values.option.value === "forklift" ? (
         <p>Forklift Field</p>
+      ) : (
+        <div className="row">
+          <div className="form-group col-lg-4 col-12">
+            <label htmlFor="engine">Engine</label>
+            <input
+              className={`form-control ${errors.engine ? "is-invalid" : ""}`}
+              type="text"
+              name="engine"
+              value={values.engine}
+              onChange={handleChange}
+            />
+            <div className="invalid-feedback">{errors.engine}</div>
+          </div>
+
+          <div className="form-group col-lg-4 col-12">
+            <label htmlFor="model">Model</label>
+            <input
+              className={`form-control ${errors.model ? "is-invalid" : ""}`}
+              type="text"
+              name="model"
+              value={values.model}
+              onChange={handleChange}
+            />
+            <div className="invalid-feedback">{errors.model}</div>
+          </div>
+
+          <div className="form-group col-lg-4 col-12">
+            <label htmlFor="producer">Producer</label>
+            <input
+              className={`form-control ${errors.producer ? "is-invalid" : ""}`}
+              type="text"
+              name="producer"
+              value={values.producer}
+              onChange={handleChange}
+            />
+            <div className="invalid-feedback">{errors.producer}</div>
+          </div>
+        </div>
       )}
-
-      <div className="row">
-        <div className="form-group col-lg-4 col-12">
-          <label htmlFor="engine">Engine</label>
-          <input
-            className={`form-control ${errors.engine ? "is-invalid" : ""}`}
-            type="text"
-            name="engine"
-            value={values.engine}
-            onChange={handleChange}
-          />
-          <div className="invalid-feedback">{errors.engine}</div>
-        </div>
-
-        <div className="form-group col-lg-4 col-12">
-          <label htmlFor="model">Model</label>
-          <input
-            className={`form-control ${errors.model ? "is-invalid" : ""}`}
-            type="text"
-            name="model"
-            value={values.model}
-            onChange={handleChange}
-          />
-          <div className="invalid-feedback">{errors.model}</div>
-        </div>
-
-        <div className="form-group col-lg-4 col-12">
-          <label htmlFor="producer">Producer</label>
-          <input
-            className={`form-control ${errors.producer ? "is-invalid" : ""}`}
-            type="text"
-            name="producer"
-            value={values.producer}
-            onChange={handleChange}
-          />
-          <div className="invalid-feedback">{errors.producer}</div>
-        </div>
-      </div>
 
       <div className="row">
         <div className="form-group col-12">
