@@ -25,7 +25,7 @@ const FilterPanel = ({ products, filterProductsByType }) => {
               type="radio"
               id="check1"
               name="type"
-              defaultValue="forklift"
+              value="forklift"
               defaultChecked={check === "forklift"}
             />
           </p>
@@ -36,7 +36,7 @@ const FilterPanel = ({ products, filterProductsByType }) => {
               type="radio"
               id="check2"
               name="type"
-              defaultValue="spare_parts"
+              value="spare_parts"
               defaultChecked={check === "spare_parts"}
             />
           </p>
